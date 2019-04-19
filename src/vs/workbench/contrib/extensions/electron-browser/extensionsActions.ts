@@ -377,9 +377,7 @@ export class UninstallAction extends ExtensionAction {
 			this.enabled = false;
 			return;
 		}
-
 		const state = this.extension.state;
-
 		if (state === ExtensionState.Uninstalling) {
 			this.label = UninstallAction.UninstallingLabel;
 			this.class = UninstallAction.UnInstallingClass;
@@ -388,18 +386,17 @@ export class UninstallAction extends ExtensionAction {
 		}
 
 		this.label = UninstallAction.UninstallLabel;
+		this.tooltip = UninstallAction.UninstallLabel;
 		this.class = UninstallAction.UninstallClass;
 
 		if (state !== ExtensionState.Installed) {
 			this.enabled = false;
 			return;
 		}
-
 		if (this.extension.type !== ExtensionType.User) {
 			this.enabled = false;
 			return;
 		}
-
 		this.enabled = true;
 	}
 
@@ -438,7 +435,6 @@ export class CombinedInstallAction extends ExtensionAction {
 		this.uninstallAction.extension = this.extension;
 		this.installAction.update();
 		this.uninstallAction.update();
-
 		if (!this.extension || this.extension.type === ExtensionType.System) {
 			this.enabled = false;
 			this.class = CombinedInstallAction.NoExtensionClass;
